@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import React from 'react';
+import Buttons from './Buttons';
+
+class App extends React.Component {
+
+  menuButtonClicked=()=>{
+
+  }
+  selectButtonClicked=()=>{
+
+  }
+  leftButtonClicked=()=>{
+
+  }
+  rightButtonClicked=()=>{
+
+  }
+  playPauseButtonClicked=()=>{
+
+  }
+
+  render(){
+    return (
+      <>
+        <div className="container" style={{display : 'flex', alignItems : 'center', justifyContent : 'center'}}>
+            <div className="App">
+              <Buttons
+              menuButtonClicked={this.menuButtonClicked}
+              selectButtonClicked={this.selectButtonClicked}
+              leftButtonClicked={this.leftButtonClicked}
+              rightButtonClicked={this.rightButtonClicked}
+              playPauseButtonClicked={this.playPauseButtonClicked}
+              />
+            </div>
+        </div>
+      </>
+    );
+  }
 }
 
 export default App;
