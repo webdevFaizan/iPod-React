@@ -2,6 +2,7 @@ import './App.css';
 import React from 'react';
 import Buttons from './Buttons';
 import Screen from './Screen';
+import ZingTouch from 'zingtouch'
 
 class App extends React.Component {
   constructor(){
@@ -19,6 +20,52 @@ class App extends React.Component {
             currently_on_play_music_screen: false,    //As this will be true, we will be able to show the music screen.
     }
   }
+
+
+
+    componentDidMount()
+    {
+        var zt = new ZingTouch.Region(document.getElementsByClassName('buttons-container')[0]);   //This getElementsByClassName returns a HTML collection, of all the containers that consists of a class with name = 'buttons-container', and we selecting the first one that is there, actually there is only one such class and applying the ZingTouch method on it, considering it as a region for ZingTouch moniter. Means any input outside this element will not be considered as a region and thus it will not be considered as a input.
+
+        //This is the main reason why the above method is not considered as the gesture of the app, the below bind method is applied for the gesture moniter, and this is the good part, our buttons inside this button container was in the form of rectangle, so the gestures could not have been applied to each button, rather it should be applied to the parent of those button, which in this case is circular in nature.
+        zt.bind(document.getElementsByClassName('buttons-container')[0], 'rotate', (event) =>   //We have taken care of the rotate event, this we had to learn from the documentation of zingtouch.
+        {
+          // console.log(event.detail.distanceFromLast);    //IMPORTANT : It was good that we added this console.log method here, we could moniter the instanteneous distance travelled by this method, but the main issue is that this distanceFromLast is taking a lot of calculation as well as it is throwing a lot of console.log statement even for a very small amount of gesture, this could lead to hanging up of the client browser since this much input is a problem the only thing is that it is based on user input and not permanent input this simply means there will be some fininte time span when this method will have any effect.
+
+            if (document.getElementsByClassName('screen-menu')[0].classList.contains('width-50'))//The rotation gesture will create any effect only when the screen-menu is visible.
+            {
+                let dist = event.detail.distanceFromLast;   //This in an internal function that takes care of the distance travelled by the rotation function in term of degress, note we need not have a gesture in the circular fashion, instead we need to have a an input and it will calculation the rotation.                
+                // I think in the depth of the analysis of this method, this mehtod is just checking for the distance from immediate last gesture, this means, there must be some kind of throttling could be done, but I also think throttling will create a problem with this method since it will not be able to handle the instanteneous gesture. But in some similar situation where you would want to limit the number of inputs or calculation so that your client does not hang up, you could use throttling.
+                this.temp_change_in_angle += dist;
+                if (this.temp_change_in_angle > 60)
+                {
+                    this.temp_selected++;
+                    this.temp_selected = this.temp_selected % this.state.options.length;
+                    this.setState({
+                        selected: this.temp_selected,
+                        // song_index: -1
+                    });
+
+                    this.temp_change_in_angle = 0;
+                }
+                else if (this.temp_change_in_angle < -60)
+                {
+                    this.temp_selected--;
+                    if (this.temp_selected === -1)
+                        this.temp_selected = this.state.options.length - 1;
+
+                    this.temp_selected = this.temp_selected % this.state.options.length;
+                    this.setState({
+                        selected: this.temp_selected,
+                        // song_index: -1
+                    });
+                    this.temp_change_in_angle = 0;
+                }
+            }
+
+        });
+    }
+
 
   menuButtonClicked=()=>{
     console.log("menu button clicked");

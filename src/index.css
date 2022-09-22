@@ -13,14 +13,13 @@ code {
 }
 
 
-
+/* All Buttons related css is here. */
 .buttons-container {
 	width: 260px;
 	height: 260px;
 	border: 3px solid black;
 	margin: 10px auto 0px auto;
 	border-radius: 50%;
-  /* border: '12px solid red'; */
 	position: relative;
 	display: flex;
 	justify-content: center;
