@@ -85,20 +85,24 @@ class App extends React.Component {
 
   render(){
     return (      
-        <div className="container" >
-              <Screen/>
-            <div className="App" style={{display : 'flex', alignItems : 'center', justifyContent : 'center'}}>
+      // The basic flow of the app is as follows - We have a screen component that changes as per the input from the buttons component, but the button component is almost same for all the pages, this is why there are not a lot of components inside the buttons component, and in the screen component we have a fixed component as menu, which will be hidden and shown as per requirement, and as per the selection of the menu items we will show other components inside the screen component itself. Like the Games component which does not have anything to show except image of game.
+      // Any click on the button and the input bar in the Buttons component will change the state in this App component which is the parent of all other components, and through prop drilling we will send in all the elements to the respective sub components. Which will be displayed on the screen.
+        <div className="App">
+              <Screen 
+                optionsInMenu={this.state.options}
+                selectedOption={this.state.selected}
+              />
+        <div className="App" style={{display : 'flex', alignItems : 'center', justifyContent : 'center'}}>
               <Buttons
-              menuButtonClicked={this.menuButtonClicked}
-              selectButtonClicked={this.selectButtonClicked}
-              leftButtonClicked={this.leftButtonClicked}
-              rightButtonClicked={this.rightButtonClicked}
-              playPauseButtonClicked={this.playPauseButtonClicked}
+                menuButtonClicked={this.menuButtonClicked}
+                selectButtonClicked={this.selectButtonClicked}
+                leftButtonClicked={this.leftButtonClicked}
+                rightButtonClicked={this.rightButtonClicked}
+                playPauseButtonClicked={this.playPauseButtonClicked}
               />
             </div>
         </div>      
     );
   }
 }
-
 export default App;
