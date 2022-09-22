@@ -84,6 +84,24 @@ class App extends React.Component {
   }
   selectButtonClicked=()=>{
     // console.log("select button clicked");
+
+
+    // This method will run when we click on the music list item, instead of Music component being loaded, we will have this mehtod going to change the state, thus we will enter the music menu.
+    if (this.state.selected === 1 && this.state.options.length === 4)
+        {
+            this.setState(
+                {
+                    options: this.state.songs_sub_menu,
+                    selected: 0,
+                    showPage: -1,
+                    song_index: -1,//we dont want to play any song
+                }
+            );
+            this.temp_selected = 0;
+            return;
+        }
+
+
     this.setState({
       showPage: this.state.selected,
       song_index: -1,//we dont want to play any song
@@ -94,6 +112,15 @@ class App extends React.Component {
   }
   leftButtonClicked=()=>{
     console.log("left button clicked");
+    if (this.state.options.length === 3 && document.getElementsByClassName('screen-menu')[0].classList.contains('width-50'))//if the menu is open and it is on the songs page only then if the left button clicked, menu will be changed to general options
+            this.setState(
+                {
+                    options: this.state.general_menu,
+                    song_index: -1,
+                    selected: 0
+                }
+            );
+
   }
   rightButtonClicked=()=>{
     console.log("right button clicked");
@@ -113,6 +140,7 @@ class App extends React.Component {
                 optionsInMenu={this.state.options}
               />
         <div className="App" style={{display : 'flex', alignItems : 'center', justifyContent : 'center'}}>
+          {/* Note in the front end, the App className is simply adding names to different elements, which simply means it will show different boxes for the buttons container as well as it will have different box for screen container. */}
               <Buttons
                 menuButtonClicked={this.menuButtonClicked}
                 selectButtonClicked={this.selectButtonClicked}
