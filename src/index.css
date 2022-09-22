@@ -198,3 +198,19 @@ code {
 	box-sizing: border-box;
 	overflow: hidden;
 }
+
+
+.loading-screen{
+	background-image: url("https://img.freepik.com/free-vector/neon-lights-background-theme_52683-44625.jpg?w=1060&t=st=1663877883~exp=1663878483~hmac=76aa885acc9469bbe2c7b99df738bcf0d7f8d2cab7385f4e7ae61a4dd562f65e");
+	background-position: center;
+	height: 100%;
+	color: white;
+}
+
+
+.loader{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+}
