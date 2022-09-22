@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getStorage,ref,getDownloadURL  } from "firebase/storage";
+import { getStorage,ref,getDownloadURL,listAll  } from "firebase/storage";
 import firebaseApp from '../Firebase';
 
 
@@ -18,8 +18,13 @@ export default class AllSongs extends Component {
     componentDidMount(){
         // Initialize Cloud Storage and get a reference to the service
         const storage = getStorage(firebaseApp);
-        const gsReference = ref(storage, 'gs://ipod-react-c473f.appspot.com/Valkyries_OST.mp3');
-        console.log(gsReference.name);
+        const listRef = ref(storage, 'music');
+        // console.log(gsReference);
+        listAll(listRef)
+        .then((res) => {
+          console.log(res) ;
+        })
+
         // getDownloadURL(ref(storage, '/Valkyries God of War - OST.mp3'))
         // .then((url) => {
         //    console.log(url);
