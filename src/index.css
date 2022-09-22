@@ -106,3 +106,46 @@ code {
 	background-color: transparent;
 	color: rgb(78, 78, 78);
 }
+
+
+/* ------------ Screen Container -------------- */
+.screen-container {
+	width: 350px;	
+	/* This height and width is predefined to make the image and the continer of this size. */
+	height: 350px;
+	margin: 10px auto;
+	background-image: url("./peakpx.jpg");	
+	/* IMPORTANT : This is a new way of importing the static images. */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow: hidden;
+	position: relative;
+	/* The position is set to be relative, so any children inside this class that would be having position as absolute will be with relation to this. */
+    border-radius: 20px;
+    transition: transform ease-in-out 0.2s;
+}
+
+
+
+
+/* --------------- Menu items --------------- */
+.screen-menu {
+	width: 0%;
+	height: 100%;
+	position: absolute;
+	z-index: 5;
+	left: 0%;
+	background-color: white;
+	/* box-shadow: none; */
+	overflow-x: hidden;
+	box-shadow: 5px 10px white;
+	transition: width ease-in-out 0.2s;
+	/* When ever the width of this item changes, then then this will be done with the help of transition, so an animation flow will be created.*/
+}
+
+.width-50 {
+	width: 50% !important;
+	/* The initial width of the item was set to be 0% but now the width is increased this means when ever we toggle between selecting and adding the width-50 element in the container then the width will be set and this when done with the help of transition, will create an animation effect. */
+	box-shadow: 0px 0px 12px 1px rgb(82, 82, 82) !important;
+}

@@ -3,25 +3,24 @@ import React from 'react';
 import Buttons from './Buttons';
 import Screen from './Screen';
 import ZingTouch from 'zingtouch'
+import $ from 'jquery'
 
 class App extends React.Component {
-  constructor(){
-    super();
-    //This app does not seem to be a very scalable solution, since we are maintaining the state of the music selection page within this state only. And also we are all kind of prop drilling. No context api no redux.
-    this.state = {
-            options: ['Games', 'Music', 'Settings', 'CoverFlow'],
-            change_in_angle: 0,   //This will moniter the change in the gesture over the ipod. Designed only for webview, zingtouch will allow us count the degrees we have dragged over the menu button and we could easily handle the change in the angle over the ipod buttons which will be considered as the input to change the menu elements and for selection purposes.
-            selected: 0,        //This is defining which item on the menu is being selected.
-            showPage: -1,       //Initially we are on the home page, this variable will help us in tracking on which page we are actually in.
-            general_menu: ['Games', 'Music', 'Settings', 'Cover Flow'],
-            songs_sub_menu: ['All Songs', 'Artists', 'Albums'],
-            current_music_selection: 0,
-            song_index: -1,     
-            currently_on_play_music_screen: false,    //As this will be true, we will be able to show the music screen.
+    constructor(){
+      super();
+      //This app does not seem to be a very scalable solution, since we are maintaining the state of the music selection page within this state only. And also we are all kind of prop drilling. No context api no redux.
+      this.state = {
+              options: ['Games', 'Music', 'Settings', 'CoverFlow'],
+              change_in_angle: 0,   //This will moniter the change in the gesture over the ipod. Designed only for webview, zingtouch will allow us count the degrees we have dragged over the menu button and we could easily handle the change in the angle over the ipod buttons which will be considered as the input to change the menu elements and for selection purposes.
+              selected: 0,        //This is defining which item on the menu is being selected.
+              showPage: -1,       //Initially we are on the home page, this variable will help us in tracking on which page we are actually in.
+              general_menu: ['Games', 'Music', 'Settings', 'Cover Flow'],
+              songs_sub_menu: ['All Songs', 'Artists', 'Albums'],     //This list of menu is hard coded here, and thus we are able to change the state of options without giving any api call.
+              current_music_selection: 0,
+              song_index: -1,     
+              currently_on_play_music_screen: false,    //As this will be true, we will be able to show the music screen.
+      }
     }
-  }
-
-
 
     componentDidMount()
     {
@@ -69,6 +68,15 @@ class App extends React.Component {
 
   menuButtonClicked=()=>{
     console.log("menu button clicked");
+    let screenMenuClassList = document.getElementsByClassName('screen-menu')[0].classList;
+        if (screenMenuClassList.contains('width-50'))
+        {
+            $('.screen-menu').removeClass('width-50');//hide menu
+        }
+        else
+        {
+            $('.screen-menu').addClass('width-50');//show menu
+        }
   }
   selectButtonClicked=()=>{
     console.log("select button clicked");
@@ -89,9 +97,9 @@ class App extends React.Component {
       // Any click on the button and the input bar in the Buttons component will change the state in this App component which is the parent of all other components, and through prop drilling we will send in all the elements to the respective sub components. Which will be displayed on the screen.
         <div className="App">
               <Screen 
-                optionsInMenu={this.state.options}
                 selectedOption={this.state.selected}
                 showPage={this.state.showPage}
+                optionsInMenu={this.state.options}
               />
         <div className="App" style={{display : 'flex', alignItems : 'center', justifyContent : 'center'}}>
               <Buttons

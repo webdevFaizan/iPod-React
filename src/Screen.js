@@ -16,6 +16,7 @@ export default class Screen extends Component {
         />
         {this.props.showPage === 0 && this.props.optionsInMenu.length === 4 ? 
         <Game /> : ''}
+        {/* IMPORTANT : When we click on the music option shown in the list, then a new component will not open up, instead on the state level we will check if that option is about music, if yes then we will change the state of the list variable to a new list containing songs_sub_menu: ['All Songs', 'Artists', 'Albums'] and after the state is mounted then we will have new components to mount which is written below.*/}
         {this.props.showPage === 2 && this.props.optionsInMenu.length === 4 ? 
         <Setting /> : ''}
         {this.props.showPage === 3 && this.props.optionsInMenu.length === 4 ? 
