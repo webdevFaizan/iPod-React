@@ -91,6 +91,7 @@ class App extends React.Component {
               <Screen 
                 optionsInMenu={this.state.options}
                 selectedOption={this.state.selected}
+                showPage={this.state.showPage}
               />
         <div className="App" style={{display : 'flex', alignItems : 'center', justifyContent : 'center'}}>
               <Buttons
