@@ -5,7 +5,7 @@ export default function Game() {
     <div className="screen-game">
       <h1>Games</h1>
       <div style={{backgroundPosition : 'center', backgroundSize : 'cover'}}>
-          <img src="./img/games.jpg" alt="" />          
+          <img src="./img/games.jpg" alt="..." />          
       </div>
     </div>
   )

@@ -21,6 +21,7 @@ code {
 	margin: 1% auto 0px auto;
 	width: min-content;
 	/* IMPORTANT : This property is used to get us the maximum of all the contents inside the App container, then the width will be calculated as per it, just bigger than this. */
+	/* If the container is small then this will take the container's height, if the container is big it will take its height. */
 	padding: 20px 10px 5px 10px;
 	border-radius: 20px;
 	background-image: url("https://img.freepik.com/free-vector/gradient-colorful-technology-background_52683-74698.jpg?w=1380&t=st=1663853972~exp=1663854572~hmac=799dfce1f3f7538fd75f7087f5aa76dabd1fcb90c03f35af8ebc182bf6dc4c46");
@@ -29,9 +30,6 @@ code {
     position:relative;
     transition: transform ease-in-out 0.2s;
 }
-
-
-
 
 
 
