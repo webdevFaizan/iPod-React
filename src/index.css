@@ -102,7 +102,7 @@ code {
 	border-radius: 0px 0% 37% 37%;
 	font-size: 30px;
 	outline: none;	
-  border: none;
+  	border: none;
 	background-color: transparent;
 	color: rgb(78, 78, 78);
 }
@@ -148,4 +148,33 @@ code {
 	width: 50% !important;
 	/* The initial width of the item was set to be 0% but now the width is increased this means when ever we toggle between selecting and adding the width-50 element in the container then the width will be set and this when done with the help of transition, will create an animation effect. */
 	box-shadow: 0px 0px 12px 1px rgb(82, 82, 82) !important;
+}
+
+
+/* Here I could have mentioned this class as the child class of screen-menu. Like this - .screen-menu > .selected but instead I just used the class directly, this will have no issue in this case, since the selected class is only present inside the .screen-menu */
+.selected {
+	background-color: rgb(157, 206, 24);
+	color: white
+}
+
+/* The following is the child combinator, The > combinator selects nodes that are direct children of the first element. Syntax: A > B Example: ul > li will match all <li> elements that are nested directly inside a <ul> element. */
+.screen-menu > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 20%;
+	border: 1px solid rgb(190, 190, 190);
+	box-sizing: border-box;
+	white-space: nowrap; /* to turn off text wrapping in the screen menu */
+}
+
+
+
+.screen-game {
+	height: 100%;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.9);
+	box-sizing: border-box;
+	overflow: hidden;
 }

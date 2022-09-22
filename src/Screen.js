@@ -13,6 +13,7 @@ export default class Screen extends Component {
         {/* This menu container will be the one that will be available all the time but it might be in a hidden state, so when the menu button is click we will trigger a functionality that will ultimately change the state, which is being passed to this component that will show the desired output. */}
         <Menu
             optionsInMenu={this.props.optionsInMenu}
+            selectedOption={this.props.selectedOption}
         />
         {this.props.showPage === 0 && this.props.optionsInMenu.length === 4 ? 
         <Game /> : ''}

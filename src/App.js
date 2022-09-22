@@ -9,6 +9,8 @@ class App extends React.Component {
     constructor(){
       super();
       //This app does not seem to be a very scalable solution, since we are maintaining the state of the music selection page within this state only. And also we are all kind of prop drilling. No context api no redux.
+      this.temp_selected=0;
+      this.temp_change_in_angle=0;
       this.state = {
               options: ['Games', 'Music', 'Settings', 'CoverFlow'],
               change_in_angle: 0,   //This will moniter the change in the gesture over the ipod. Designed only for webview, zingtouch will allow us count the degrees we have dragged over the menu button and we could easily handle the change in the angle over the ipod buttons which will be considered as the input to change the menu elements and for selection purposes.
@@ -31,14 +33,17 @@ class App extends React.Component {
         {
           // console.log(event.detail.distanceFromLast);    //IMPORTANT : It was good that we added this console.log method here, we could moniter the instanteneous distance travelled by this method, but the main issue is that this distanceFromLast is taking a lot of calculation as well as it is throwing a lot of console.log statement even for a very small amount of gesture, this could lead to hanging up of the client browser since this much input is a problem the only thing is that it is based on user input and not permanent input this simply means there will be some fininte time span when this method will have any effect.
 
-            if (document.getElementsByClassName('screen-menu')[0].classList.contains('width-50'))//The rotation gesture will create any effect only when the screen-menu is visible.
+          
+            if (document.getElementsByClassName('screen-menu')[0].classList.contains('width-50')===true)//The rotation gesture will create any effect only when the screen-menu is visible.
             {
                 let dist = event.detail.distanceFromLast;   //This in an internal function that takes care of the distance travelled by the rotation function in term of degress, note we need not have a gesture in the circular fashion, instead we need to have a an input and it will calculation the rotation.                
-                // I think in the depth of the analysis of this method, this mehtod is just checking for the distance from immediate last gesture, this means, there must be some kind of throttling could be done, but I also think throttling will create a problem with this method since it will not be able to handle the instanteneous gesture. But in some similar situation where you would want to limit the number of inputs or calculation so that your client does not hang up, you could use throttling.
+                // I think in the depth of the analysis of this method, this mehtod is just checking for the distance from immediate last gesture, this means, there must be some kind of throttling could be done, but I also think throttling will create a problem with this method since it will not be able to handle the instanteneous gesture. But in some similar situation where you would want to limit the number of inputs or calculation so that your client does not hang up, you could use throttling.                
                 this.temp_change_in_angle += dist;
-                if (this.temp_change_in_angle > 60)
+                //IMPORTANT : If by any means I have forgot to declare this variable this.temp_change_in_angle then this line should throw an error but instead it is giving NaN, since dist is a number that could not be added to this variable, and hence I could not create any meaningful number. But there is one problem, it should throw an error since we might forget what is deleted and what is not.
+                if (this.temp_change_in_angle > 100)
                 {
                     this.temp_selected++;
+                    
                     this.temp_selected = this.temp_selected % this.state.options.length;
                     this.setState({
                         selected: this.temp_selected,
@@ -47,7 +52,7 @@ class App extends React.Component {
 
                     this.temp_change_in_angle = 0;
                 }
-                else if (this.temp_change_in_angle < -60)
+                else if (this.temp_change_in_angle < -100)
                 {
                     this.temp_selected--;
                     if (this.temp_selected === -1)
@@ -61,7 +66,6 @@ class App extends React.Component {
                     this.temp_change_in_angle = 0;
                 }
             }
-
         });
     }
 
@@ -79,7 +83,14 @@ class App extends React.Component {
         }
   }
   selectButtonClicked=()=>{
-    console.log("select button clicked");
+    // console.log("select button clicked");
+    this.setState({
+      showPage: this.state.selected,
+      song_index: -1,//we dont want to play any song
+      selected: 0,
+    });
+    this.temp_selected = 0;
+    this.menuButtonClicked();
   }
   leftButtonClicked=()=>{
     console.log("left button clicked");
