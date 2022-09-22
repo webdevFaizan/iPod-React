@@ -27,6 +27,8 @@ export default class Screen extends Component {
         {this.props.showPage === 0 && this.props.optionsInMenu.length === 3 ? <AllSongs 
         currentMusicSelection={this.props.currentMusicSelection}
         songIndex={this.props.songIndex}
+        currentlyOnPlayMusicScreen={this.props.currentlyOnPlayMusicScreen}
+        playPauseButtonClicked={this.props.playPauseButtonClicked}
         /> : ''}
         {this.props.showPage === 1 && this.props.optionsInMenu.length === 3 ? 
         <Artists /> : ''}

@@ -129,6 +129,21 @@ class App extends React.Component {
     console.log("play/pause button clicked");
   }
 
+  currentlyOnPlayMusicScreen = () =>
+    {
+        if (this.state.currently_on_play_music_screen)
+        {
+            $('.buttons-container').removeClass('colored');
+            this.setState({
+                currently_on_play_music_screen: false
+            });
+        }
+        else
+            this.setState({
+                currently_on_play_music_screen: true
+            });
+    }
+
   render(){
     return (      
       // The basic flow of the app is as follows - We have a screen component that changes as per the input from the buttons component, but the button component is almost same for all the pages, this is why there are not a lot of components inside the buttons component, and in the screen component we have a fixed component as menu, which will be hidden and shown as per requirement, and as per the selection of the menu items we will show other components inside the screen component itself. Like the Games component which does not have anything to show except image of game.
@@ -140,6 +155,8 @@ class App extends React.Component {
                 optionsInMenu={this.state.options}
                 currentMusicSelection={this.state.current_music_selection}
                 songIndex={this.state.song_index}
+                currentlyOnPlayMusicScreen={this.currentlyOnPlayMusicScreen}
+                playPauseButtonClicked={this.playPauseButtonClicked}
               />
         <div className="App" style={{display : 'flex', alignItems : 'center', justifyContent : 'center'}}>
           {/* Note in the front end, the App className is simply adding names to different elements, which simply means it will show different boxes for the buttons container as well as it will have different box for screen container. */}
