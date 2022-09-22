@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import { getStorage,ref,getDownloadURL,listAll  } from "firebase/storage";
 import firebaseApp from '../Firebase';
 import Loading from './Loading'
+import PlayMusic from './PlayMusic';
 
 export default class AllSongs extends Component{
     constructor(){
@@ -29,11 +30,11 @@ export default class AllSongs extends Component{
                 .then((url) =>
                 {
                     this.new_data_array.push({ name: elem.name, url: url });
-                    if (this.new_data_array.length === 2)//load the component when all the songs are added to the array.
+                    if (this.new_data_array.length === 6)//load the component when all the songs are added to the array.
                     {
                         this.setState({
                             all_songs_list: this.new_data_array,
-                            loading: true
+                            loading: false
                         },()=>{
                             console.log(this.state.all_songs_list);     //This will display the list of elements after the state has been changed.
                         });
@@ -47,8 +48,40 @@ export default class AllSongs extends Component{
         })
     }
   render() {
+
+    // This if condition is a very smart method by which a different container will be mounted, if the index is -1 then we are on the list, but if the songIndex is changed by the press of the buttons, the state would change, it would get updated and thus this if condition will be launched with this PlayMusic component being mounted.
+    if (this.props.songIndex !== -1)
+    {
+        return <PlayMusic
+            songIndex={this.props.songIndex}
+            Songs={this.state.all_songs_list}
+            currentlyOnPlayMusicScreen={this.props.currentlyOnPlayMusicScreen}
+            playPauseButtonClicked={this.props.playPauseButtonClicked}
+        />;
+    }
+
     return (
-        this.state.loading ? <Loading/> : ''
+        this.state.loading ? <Loading/> 
+        :
+        <div className="all-songs">
+            <h1 className="all-songs-heading">
+                All Songs
+            </h1>
+            <div className="all-songs-list">
+                {this.state.all_songs_list.map((item, index) =>
+                {
+                    return (
+                        // IMPORTANT : Just like in the menu items list, if the following condition is met, then a class will be added which will only add the colors to the class. And again, the UI is not controlling anything, the buttons are controlling everything, the change in the state variable, and UI is just one stream that is making the use of the data from the state variables.
+                        <div className={this.props.currentMusicSelection === index ? 'selected-song' : ''} key={index}>
+                            {item.name}
+                        </div>
+                    )
+                })}
+                <div className="instruction-all-songs">
+                    Use "<i className="fas fa-backward"></i>" and "<i className="fas fa-forward"></i>" buttons to navigate.
+                </div>
+            </div>
+        </div>
     )
   }
 }

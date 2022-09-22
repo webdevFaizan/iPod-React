@@ -214,3 +214,70 @@ code {
 	align-items: center;
 	color: white;
 }
+
+
+
+
+
+/* ALL SONGS SCREEN ///////////////////////////////////////////////////////////// */
+.all-songs {
+	height: 100%;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.9);
+	box-sizing: border-box;
+	/* border-box tells the browser to account for any border and padding in the values you specify for an element's width and height. If you set an element's width to 100 pixels, that 100 pixels will include any border or padding you added, and the content box will shrink to absorb that extra width. This is done in order to keep the maximum box size fixed, and the content inside it will adjust according to that fixed length */
+	overflow: hidden;
+}
+.all-songs-heading {
+	padding-bottom: 10px;
+	background-color: #e48537;
+	margin: 0px;
+	height: 15%;
+	color: white;
+}
+.all-songs-list {
+	background-color: #5a4e72;
+	height: 85%;
+}
+.all-songs-list > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid rgb(0, 0, 0);
+	width: 100%;
+	height: 14%;
+	/* IMPORTANT : If this height is removed and the height of its container is kept the same, this will be a problem, since the container height is like the pulling the height as upto 85% but if we push the height of each element internally to be 14% then this is going to be more effective. */
+	color: white;
+}
+
+
+/* This animation is the dimming animation for highlighting the change in navigation buttons. */
+@keyframes highlight
+{
+    0%
+    {
+        color:rgb(41, 30, 189);
+    }
+    50%
+    {
+        color:white;
+    }
+    100%
+    {
+        color:rgb(41, 30, 189);
+    }
+}
+
+.instruction-all-songs {
+	height: 20%;
+	background-color: #17a2b8;
+    color: white;
+
+    animation-name: highlight;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+.selected-song {
+	background-color: #45bd21;
+}

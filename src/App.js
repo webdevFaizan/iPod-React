@@ -138,6 +138,8 @@ class App extends React.Component {
                 selectedOption={this.state.selected}
                 showPage={this.state.showPage}
                 optionsInMenu={this.state.options}
+                currentMusicSelection={this.state.current_music_selection}
+                songIndex={this.state.song_index}
               />
         <div className="App" style={{display : 'flex', alignItems : 'center', justifyContent : 'center'}}>
           {/* Note in the front end, the App className is simply adding names to different elements, which simply means it will show different boxes for the buttons container as well as it will have different box for screen container. */}
