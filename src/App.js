@@ -85,55 +85,47 @@ class App extends React.Component {
 
 
   selectButtonClicked=()=>{
-    // console.log("select button clicked");
-
     if(this.state.currently_on_play_music_screen&&!document.getElementsByClassName('screen-menu')[0].classList.contains('width-50'))//if i am currently on the play music screen and the side bar is hidden, in that case if i click on the select button, ideally nothing should happen.
-    {
-        return;
-    }
-
-    // This method will run when we click on the music list item, instead of Music component being loaded, we will have this mehtod going to change the state, thus we will enter the music menu.
-    if (this.state.selected === 1 && this.state.options.length === 4)
-    {
-        this.setState(
-            {
-                options: this.state.songs_sub_menu,
-                selected: 0,
-                showPage: -1,
-                song_index: -1,//we dont want to play any song
-            }
-        );
-        this.temp_selected = 0;
-        return;
-    }
-
-
-    if (!document.getElementsByClassName('screen-menu')[0].classList.contains('width-50'))//side menu is not visible
-    {
-        if (this.state.options.length === 3)//I must be on the music section
         {
-            if (this.state.showPage === 0)//I am on all songs page
-            {
-                if (this.state.song_index === -1)//we are not on the music page
+            return;
+        }
+        if (this.state.selected === 1 && this.state.options.length === 4)
+        {
+            this.setState(
                 {
-                    this.setState({
-                        song_index: this.state.current_music_selection,//which song to play (here we want to play a song)
-                    });
-                    this.temp_selected = 0;
-                    return;
+                    options: this.state.songs_sub_menu,
+                    selected: 0,
+                    showPage: -1,
+                    song_index: -1,//we dont want to play any song
+                }
+            );
+            this.temp_selected = 0;
+            return;
+        }
+        if (!document.getElementsByClassName('screen-menu')[0].classList.contains('width-50'))//side menu is not visible
+        {
+            if (this.state.options.length === 3)//I must be on the music section
+            {
+                if (this.state.showPage === 0)//I am on all songs page
+                {
+                    if (this.state.song_index === -1)//we are not on the music page
+                    {
+                        this.setState({
+                            song_index: this.state.current_music_selection,//which song to play (here we want to play a song)
+                        });
+                        this.temp_selected = 0;
+                        return;
+                    }
                 }
             }
         }
-    }
-
-    
-    this.setState({
-      showPage: this.state.selected,
-      song_index: -1,//we dont want to play any song
-      selected: 0,
-    });
-    this.temp_selected = 0;
-    this.menuButtonClicked();
+        this.setState({
+            showPage: this.state.selected,
+            song_index: -1,//we dont want to play any song
+            selected: 0,
+        });
+        this.temp_selected = 0;
+        this.menuButtonClicked();
   }
 
 
@@ -195,6 +187,8 @@ class App extends React.Component {
     }
 
   }
+
+  // IMPORTANT : This clearly is not a very scalable application, we are manually taking care of each cases, on which we are currently on, and then we are accessing which page we have to go, this should have been done by a single component mounting, but instead we had to check whether we are on a play screen on not, also we have to cross check all the time if we are having 3 items or 4 items on the list, all these are non scalable, plus the list of items was hard coded, which in real world scenarios are rarely there. As for a basic application this is fine, but to make this application much more scalable there should have been other modular design pattern approach.
   rightButtonClicked=()=>{
     // console.log("right button clicked");
     /* the right button could have also been clicked to change the song which is currently being played to the next song. */
