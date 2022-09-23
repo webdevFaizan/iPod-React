@@ -154,20 +154,27 @@ class App extends React.Component {
   playPauseButtonClicked=()=>{
     // console.log("play/pause button clicked");
 
-    // console.log($('#audio')[0]);
-    $('#audio')[0].play();
+    // console.log($('#audio')[0].paused);
+    // $('#audio')[0].play();
 
-    // if ($('#audio')[0] !== undefined)
-    //     {
-    //         if ($('#audio')[0].paused)//if the music is paused i will play it, also turn on the button lights
-    //         {
-    //             $('#audio')[0].play();
-    //             // $('.buttons-container').addClass('colored');
-    //             return;
-    //         }
-    //         $('#audio')[0].pause();
-    //         // $('.buttons-container').removeClass('colored');
-    //     }
+    if ($('#audio')[0] !== undefined)
+        {
+            if ($('#audio')[0].paused)//if the music is paused i will play it, also turn on the button lights
+            {
+                $('#audio')[0].play();
+                // $('.buttons-container').addClass('colored');
+                // console.log('inside if')
+                return;
+            }
+            else{
+                $('#audio')[0].pause();
+                // console.log('inside else')
+            }         
+            
+            // $('.buttons-container').removeClass('colored');
+            // console.log('outside inner  if-else');
+        }
+        // console.log('outside if');
   }
 
   currentlyOnPlayMusicScreen = () =>
