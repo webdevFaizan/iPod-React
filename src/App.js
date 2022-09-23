@@ -85,23 +85,46 @@ class App extends React.Component {
   selectButtonClicked=()=>{
     // console.log("select button clicked");
 
+    if(this.state.currently_on_play_music_screen&&!document.getElementsByClassName('screen-menu')[0].classList.contains('width-50'))//if i am currently on the play music screen and the side bar is hidden, in that case if i click on the select button, ideally nothing should happen.
+    {
+        return;
+    }
 
     // This method will run when we click on the music list item, instead of Music component being loaded, we will have this mehtod going to change the state, thus we will enter the music menu.
     if (this.state.selected === 1 && this.state.options.length === 4)
+    {
+        this.setState(
+            {
+                options: this.state.songs_sub_menu,
+                selected: 0,
+                showPage: -1,
+                song_index: -1,//we dont want to play any song
+            }
+        );
+        this.temp_selected = 0;
+        return;
+    }
+
+
+    if (!document.getElementsByClassName('screen-menu')[0].classList.contains('width-50'))//side menu is not visible
+    {
+        if (this.state.options.length === 3)//I must be on the music section
         {
-            this.setState(
+            if (this.state.showPage === 0)//I am on all songs page
+            {
+                if (this.state.song_index === -1)//we are not on the music page
                 {
-                    options: this.state.songs_sub_menu,
-                    selected: 0,
-                    showPage: -1,
-                    song_index: -1,//we dont want to play any song
+                    this.setState({
+                        song_index: this.state.current_music_selection,//which song to play (here we want to play a song)
+                    });
+                    this.temp_selected = 0;
+                    return;
                 }
-            );
-            this.temp_selected = 0;
-            return;
+            }
         }
+    }
 
-
+    
     this.setState({
       showPage: this.state.selected,
       song_index: -1,//we dont want to play any song
@@ -110,6 +133,9 @@ class App extends React.Component {
     this.temp_selected = 0;
     this.menuButtonClicked();
   }
+
+
+
   leftButtonClicked=()=>{
     console.log("left button clicked");
     if (this.state.options.length === 3 && document.getElementsByClassName('screen-menu')[0].classList.contains('width-50'))//if the menu is open and it is on the songs page only then if the left button clicked, menu will be changed to general options
@@ -126,7 +152,22 @@ class App extends React.Component {
     console.log("right button clicked");
   }
   playPauseButtonClicked=()=>{
-    console.log("play/pause button clicked");
+    // console.log("play/pause button clicked");
+
+    // console.log($('#audio')[0]);
+    $('#audio')[0].play();
+
+    // if ($('#audio')[0] !== undefined)
+    //     {
+    //         if ($('#audio')[0].paused)//if the music is paused i will play it, also turn on the button lights
+    //         {
+    //             $('#audio')[0].play();
+    //             // $('.buttons-container').addClass('colored');
+    //             return;
+    //         }
+    //         $('#audio')[0].pause();
+    //         // $('.buttons-container').removeClass('colored');
+    //     }
   }
 
   currentlyOnPlayMusicScreen = () =>

@@ -300,3 +300,42 @@ code {
 .colored .center-circle {
 	background-color: black;
 }
+
+
+
+/* MUSIC SCREEN //////////////////////////////////////////////////////////////////////////////////////////// */
+.screen-music > h2 {
+	background-color: rgb(66, 66, 66);
+	margin: 0px;
+	margin-bottom: 10px;
+	padding: 10px;
+	color: white !important;
+}
+
+.song-image {
+	width: 50%;
+	height: 50%;
+	margin-left: auto;
+	box-shadow: 0px 0px 12px 5px grey;
+	margin-right: auto;
+	border-radius: 20px;
+}
+
+.song-image > img {
+	border-radius: inherit;
+	height: 100%;
+	width: 100%;
+}
+
+#audio {
+	outline: none;
+}
+
+.screen-music-instruction > p {
+    margin: 0px;
+    
+    animation-name: highlight;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}

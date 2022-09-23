@@ -1,4 +1,5 @@
 import React from 'react';
+// import image from '../../public/img/music.jpg';
 
 class Music extends React.Component
 {
@@ -15,11 +16,12 @@ class Music extends React.Component
     render()
     {
         const {songIndex, Songs}=this.props;
+        // The destrcuturing of the props should be done only in this render method before the return statement, not in the CDM method or before the class or else it will throw an error.
         return (
             <div className="screen-music">
-                <h2>{Songs[songIndex].name}</h2>
+                <h2>{Songs[songIndex].name.split(' ')[0]}</h2>
                 <div className="song-image">
-                    <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzrIyTb8emnPtXD2EYZ1nkSdIkYZ2zxUzUhw&usqp=CAU'} alt="song item"></img>
+                    <img src={'./img/music.jpg'} alt="song item"></img>
                 </div>
                 <div style={{marginTop:20}}>
                     <audio controls="seeking" id="audio" src={Songs[songIndex].url}></audio>
