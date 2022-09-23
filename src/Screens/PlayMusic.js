@@ -1,5 +1,7 @@
 import React from 'react';
 // import image from '../../public/img/music.jpg';
+import $ from 'jquery'
+
 
 class Music extends React.Component
 {
@@ -20,13 +22,13 @@ class Music extends React.Component
     async play(){      
         // The main reason why there was an initial error was that, .play() mehtod returns a promise, this means we will have to get it resolved, if it is not resolved then it will continue giving us a uncaught promise error.
         await document.getElementById('audio').play();
+        $('.buttons-container').addClass('colored');
+        // This addClass method is there in the jquery, without importing the $ sign from jquery this .addClass syntax was giving an error, but I had to add this class individually since I am not able to run teh playPauseButtonClicked() method as the promise of .play() is not getting resolved.
     }
 
     componentWillUnmount()
     {
         // IMPORTANT : This button here is a very good example of switching to and from music playing screen, when this component is mounted, then this animation should start and how will this be checked? This is exactly what this method is doing, in the App.js file this method is actually changing the state of the variable which means whent his component will be mounted that animation will start, and when this component is unmounted then this method will run again, it would behave like a kind of toggle switch. But as you notice we have done a lot of prop drilling for this method itself, I think this prop drilling was not required for this animation, as it seems kind of unnecessary.
-        
-        
         this.props.currentlyOnPlayMusicScreen();    
     }
     

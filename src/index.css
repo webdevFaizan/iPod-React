@@ -286,19 +286,29 @@ code {
 
 /* The following class is going to work in the case when the music starts playing, then the tutton-container has an infinite loop of change in colors.  */
 .colored {
-    transition:background-color ease-in-out 0.2s;
-	animation-name: background-gradient-animation;
-	animation-duration: 5s;
-	animation-timing-function: ease-in-out;
-	animation-iteration-count: infinite;
-	color: white;
+    /* transition: background-color ease-in-out 0.2s; */
+	animation: gradient 15s ease infinite;
+	/* color: white; */
     opacity: 0.9;
+	z-index: 6;
 }
 .colored svg {
 	color: white;
 }
 .colored .center-circle {
 	background-color: black;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 
